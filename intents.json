@@ -1,0 +1,122 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+         "Hi there, how may  I help you?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "vehicles",
+      "patterns": [
+        "What do you sell?",
+        "What types of vehicles do you have?",
+        "Tell me about your vehicles",
+        "Can you list the types of vehicles you sell?"
+      ],
+      "responses": [
+        "We offer a variety of vehicles, including cars, trucks, and bikes.",
+        "Our inventory includes cars, trucks and bikes.",
+        "Explore our range of vehicles, from stylish cars to rugged trucks and sleek bikes."
+      ]
+    },
+    {
+      "tag": "payments",
+      "patterns": [
+        "Do you take credit cards?",
+        "Do you accept Mastercard?",
+        "Can I pay with Paypal?",
+        "Are you cash only?"
+      ],
+      "responses": [
+        "We accept VISA, Mastercard and Paypal",
+        "We accept most major credit cards, and Paypal"
+      ]
+    },
+    {
+      "tag": "delivery",
+      "patterns": [
+        "How long does delivery take?",
+        "How long does shipping take?",
+        "When do I get my delivery?"
+      ],
+      "responses": [
+        "Delivery takes 2-4 days",
+        "Shipping takes 2-4 days"
+      ]
+    },
+    {
+      "tag": "financing",
+      "patterns": [
+        "Do you offer financing options?",
+        "Can I finance a vehicle purchase?",
+        "Tell me about your financing plans."
+      ],
+      "responses": [
+        "Yes, we provide financing options to make your vehicle purchase more convenient.",
+        "We offer flexible financing plans to suit your budget.",
+        "Explore our financing options to find the best plan for your new vehicle."
+      ]
+    },
+    {
+      "tag": "test_drive",
+      "patterns": [
+        "Can I schedule a test drive?",
+        "How can I test drive a vehicle?",
+        "Tell me about test driving a car."
+      ],
+      "responses": [
+        "Certainly! You can schedule a test drive by contacting us or visiting our showroom.",
+        "We encourage test drives! Contact us to arrange a convenient time to experience your chosen vehicle.",
+        "Feel the thrill of the driver's seat! Schedule a test drive with us today."
+      ]
+    },
+    {
+      "tag": "maintenance",
+      "patterns": [
+        "How often should I service my vehicle?",
+        "Tell me about vehicle maintenance.",
+        "What kind of maintenance is required?"
+      ],
+      "responses": [
+        "Regular maintenance is crucial for the longevity of your vehicle. We recommend scheduled service intervals.",
+        "Proper maintenance ensures your vehicle stays in top condition. Check your owner's manual for service recommendations.",
+        "Our service team is here to assist you with all your vehicle maintenance needs. Schedule your service appointment today."
+      ]
+    },
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+        "What did the buffalo say when his son left for college? Bison."
+      ]
+    }
+  ]
+}
