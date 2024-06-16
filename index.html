@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+<style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    #chat-container {
+      max-width: 1000px;
+      height: 600px;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+      position: relative;
+    }
+
+    #pink-top,
+    #pink-bottom {
+      background: linear-gradient(45deg, #F800C0, #4B4CFF);
+      height: 40px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-right: 10px; /* Adjusted margin */
+    }
+
+    #logo,
+    #miclogo {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px; /* Adjusted margin */
+    }
+
+    #logo-name,
+    #miclogo-name {
+      color: white;
+      margin-right: 40px; /* Adjusted margin */
+    }
+
+    #straight-line {
+      height: 100%;
+      width: 2px;
+      background-color: white;
+    }
+
+    #pink-top {
+      top: 1;
+    }
+
+    #pink-bottom {
+      bottom: 0;
+    }
+
+    #user-column,
+    #chat-column {
+      flex-grow: 1;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    #user-column {
+      background-color: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 40px 20px;
+      width: 50%;
+      border-right: 1px solid #ccc;
+    }
+    
+    
+
+    #user-images {
+      display: flex;
+      flex-direction: column;
+      align-items: centre;
+      position: fixed;
+    }
+
+    .user-image {
+      width: 80%;
+      height: 200%;
+      border-radius: 50%;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    #speakButton {
+      width: 110px; /* Set the width as needed */
+      padding: 8px; /* Adjust padding for a better appearance */
+      margin-top: 10px; /* Adjust margin for spacing */
+      margin-left: 150px;
+    }
+
+    #chat-column {
+      background-color: #ffffff;
+      padding: 20px;
+      position: relative;
+      width: 60%;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .user-label {
+      text-align: right;
+      font-weight: bold;
+      padding: 4px; /* Add padding for spacing */
+      display: block; /* Make sure the background only covers the content */
+      border-radius: 6px; /* Adjust the border-radius for rounded corners */
+      margin-bottom: 4px; /* Add some margin at the bottom for spacing between the label and user message */
+    }
+
+    .user-message {
+      text-align: right;
+      color: #0d0e0d;
+      background-color: rgb(144, 142, 243); /* Set the background color of the highlighter */
+      padding: 5px; /* Add some padding to give space around the text */
+      display: block;
+      margin-bottom: 10px; 
+      border-radius: 20px; 
+    }
+
+    .bot-label {
+      text-align: left;
+      font-weight: bold;
+      padding: 4px; /* Add padding for spacing */
+      display: block; /* Make sure the background only covers the content */
+      border-radius: 6px; /* Adjust the border-radius for rounded corners */
+      margin-bottom: 4px; /* Add some margin at the bottom for spacing between the label and user message */
+    }
+
+    .bot-message {
+      text-align: left;
+      color: #0f0f0f;
+      background-color: rgb(238, 155, 224); /* Set the background color of the highlighter */
+      padding: 5px; /* Add some padding to give space around the text */
+      display: block;
+      margin-bottom: 10px; 
+      border-radius: 20px; 
+    }
+
+    #search-container {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+
+    #searchInput {
+      width: 320px;
+      height: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 50px; /* Oval shape */
+      display: none; /* Hidden by default */
+      transition: all 0.3s ease;
+    }
+      
+     #searchInput.visible {
+      display: block !important;
+}a
+    .select-container {
+      position: relative;
+      right: 30px;
+    }
+
+    .custom-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border: 2px solid #ccc;
+      padding: 6px;
+      border-radius: 20px;
+      width: 200px;
+      outline: none;
+      cursor: pointer;
+      position: relative; /* Add this line */
+      right : 50%; /* Add this line */
+    }
+
+    .select-arrow {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+    }
+
+    .oval-option {
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-top: 5px;
+    }
+
+    .oval-option img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    #miclogo {
+      width: 30px;
+      height: 30px;
+      margin-left: 5px;
+    }
+
+    #sendButton {
+      width: 30px;
+      height: 30px;
+      margin-left: 5px;
+    }
+
+    #miclogo-name {
+      color: white;
+    }
+
+</style>
+</head>
+<script>
+ var recognition;
+var isRecording = false;
+
+  function toggleRecording() {
+    if (!recognition) {
+      recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onstart = function() {
+        if (miclogo) {
+          miclogo.src = "{{ url_for('static', filename='images__1_-removebg-preview.png') }}";
+        }
+      };
+
+      recognition.onend = function() {
+        if (miclogo) {
+          miclogo.src = "{{ url_for('static', filename='icone-de-microphone-rouge.png') }}";
+        }
+      };
+
+      recognition.onresult = function(event) {
+        var result = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          result += event.results[i][0].transcript;
+        }
+        document.getElementById('searchInput').value = result;
+      };
+    }
+
+    if (isRecording) {
+      recognition.stop();
+    } else {
+      recognition.start();
+    }
+
+    isRecording = !isRecording;
+
+    recognition.onresult = function(event) {
+    var result = '';
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      result += event.results[i][0].transcript;
+    }
+    document.getElementById('searchInput').value = result;
+
+    // Send transcription to the Flask server
+    fetch('/transcribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ transcription: result }),
+    })
+    .then(response => response.json())
+    .then(data => console.log('Server response:', data));
+  };
+  }
+   
+
+</script>
+
+<body>
+  <div id="chat-container">
+    <div id="pink-top">
+      <div class="logo-container">
+        <img id="logo" src="{{ url_for('static', filename='Untitled design (4).png') }}" alt="Logo">
+        <div id="straight-line"></div>
+        <div id="logo-name">Fredo Chatbot</div>
+      </div>
+      <div class="select-container">
+        <select class="custom-select" id="countrySelect">
+          <option value="us" class="oval-option">&#x1F1FA;&#x1F1F8; United States</option>
+          <option value="ca" class="oval-option">&#x1F1E8;&#x1F1E6; Canada</option>
+          <option value="uk" class="oval-option">&#x1F1EC;&#x1F1E7; United Kingdom</option>
+          <option value="UAB" class="oval-option">&#x1F1EC;&#x1F1E7; United Arab Emirates</option>
+          <option value="IN" class="oval-option">&#x1F1EC;&#x1F1E7; India</option>
+          <!-- Add more countries as needed -->
+        </select>
+        <div class="select-arrow">&#9660;</div>
+      </div>
+    </div>
+    <div id="user-column">
+      <div id="user-images">
+        <img class="user-image" src="{{ url_for('static', filename='Future_Based_On-removebg-preview.png') }}" alt="Human Image 1">
+        <button id="speakButton" hidden>Speak Bot Message</button>
+      </div>
+      <div id="speakbutton">
+      
+    </div>
+    </div>
+    <div id="chat-column">
+    <div id="bot-question-response-container"></div>
+    </div>
+    <div id="pink-bottom">
+      <div class="logo-container">
+  <img id="logo" src="{{ url_for('static', filename='2055824.png') }}" alt="Logo">
+  <div id="straight-line"></div>
+  <div id="logo-name">Upload</div>
+
+</div>
+      <!-- Modify your #miclogo container to include the button -->
+      <div id="search-container">
+        <input type="text" id="searchInput" placeholder="Type your message here...">
+        <img id="sendButton" src="{{ url_for('static', filename='send.png') }}" alt="Send Logo" onclick="sendMessage()">
+        <img id="miclogo" src="{{ url_for('static', filename='images__1_-removebg-preview.png') }}" alt="Mic Logo" onclick="toggleRecording()">
+      </div>
+
+    </div>
+  </div>
+
+<script>
+var synth = window.speechSynthesis;
+var voices = synth.getVoices();
+var follow_up_jv = false;
+var vehicle_type_jv = 0;
+function sendMessage() {
+    var messageInput = document.getElementById('searchInput');
+    var message = messageInput.value.trim();
+    if(follow_up_jv === false){if (message !== '') {
+      addUserMessage(message);
+      messageInput.value = ''; // Clear the input field
+    }}
+    else if(follow_up_jv===true){if (message !== '') {
+      addUserMessage2(message);
+      messageInput.value = ''; // Clear the input field
+    }
+    }
+  }
+
+
+  function addUserMessage2(message) {
+    var userColumn2 = document.getElementById('chat-column');
+    var userMessage2 = document.createElement('div');
+    userMessage2.className = 'message user-label';
+    userMessage2.textContent = "User";
+    userColumn2.appendChild(userMessage2);
+    var userColumn = document.getElementById('chat-column');
+    var userMessage = document.createElement('div');
+    userMessage.className = 'message user-message';
+    userMessage.textContent = message;
+    userColumn.appendChild(userMessage);
+
+    // After adding a user message, simulate a bot response
+    //simulateBotResponse();
+
+    // After adding a user message, send a request to the FastAPI endpoint
+    fetch('http://127.0.0.1:8000/vehicle_details', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        user_input: message
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+          follow_up_jv = false;
+          vehicle_type_jv = 0;
+          addBotMessage(data.response);}
+          )
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+
+  // Add event listener for "Enter" key press on the input field
+  var searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      sendMessage(); // Simulate a click on the send button
+    }
+  });
+
+  
+
+  function addUserMessage(message) {
+    var userColumn2 = document.getElementById('chat-column');
+    var userMessage2 = document.createElement('div');
+    userMessage2.className = 'message user-label';
+    userMessage2.textContent = "User";
+    userColumn2.appendChild(userMessage2);
+    var userColumn = document.getElementById('chat-column');
+    var userMessage = document.createElement('div');
+    userMessage.className = 'message user-message';
+    userMessage.textContent = message;
+    userColumn.appendChild(userMessage);
+
+    // After adding a user message, simulate a bot response
+    //simulateBotResponse();
+
+    // After adding a user message, send a request to the FastAPI endpoint
+    fetch('http://127.0.0.1:8000/chatbot', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        user_input: message,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Update the chat with the response from the FastAPI endpoint
+        const obj = data.response.split("####");
+        //console.log(obj);
+
+        const jsonString = obj[1]
+        .replace(/False/g, 'false')
+        .replace(/(\w+):/g, '"$1":')
+        .replace(/'/g, '"');
+
+        // Parse the string into a JSON object
+        const jsonObject = JSON.parse('{' + jsonString + '}');
+        
+        if (jsonObject.follow_up === true){
+          console.log(jsonObject)
+          follow_up_jv = true
+          vehicle_type_jv = jsonObject.vehicle_type
+          addBotMessage(obj[0]);
+        }
+        else{
+          follow_up_jv = false
+          vehicle_type_jv = 0
+          addBotMessage(obj[0]);
+        }
+        
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  function addBotMessage(message) {
+    var userColumn2 = document.getElementById('chat-column');
+    var userMessage2 = document.createElement('div');
+    userMessage2.className = 'message bot-label';
+    userMessage2.textContent = "Fredo";
+    userColumn2.appendChild(userMessage2);
+    var botColumn = document.getElementById('chat-column');
+    var botMessage = document.createElement('div');
+    botMessage.className = 'message bot-message';
+    botMessage.textContent = message;
+    botColumn.appendChild(botMessage);
+    // Speak the bot message
+    latestBotMessage = message;
+    //var speakButton = document.getElementById('speakButton');
+    //speakButton.addEventListener('click', function () {
+    speakText(latestBotMessage);
+    //});
+    
+    
+  }
+
+  function getLastUserMessage() {
+    // Get the last user message in the chat
+    var userMessages = document.getElementsByClassName('user-message');
+    if (userMessages.length > 0) {
+      return userMessages[userMessages.length - 1].textContent;
+    }
+    return '';
+  }
+
+  function simulateBotResponse() {
+    // Simulate a bot response after a short delay
+    setTimeout(function () {
+      var userMessage = 'User, your last message was: ' + getLastUserMessage();
+      addBotMessage(userMessage);
+    }, 1000); // Adjust the delay as needed
+  }
+
+  function speakText(text) {
+    
+    synth.cancel();
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voices[1];
+    synth.speak(utterance);
+  }
+  
+document.addEventListener('DOMContentLoaded', function () {
+
+
+  function showSearchBar() {
+    var searchInput = document.getElementById('searchInput');
+    searchInput.style.display = 'block';
+  }
+
+
+  setTimeout(showSearchBar, 1000);
+  function speakText2(text) {
+    
+    synth.cancel();
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voices[1];
+    synth.speak(utterance);
+  }
+  
+
+  document.getElementById('countrySelect').addEventListener('change', function () {
+    console.log('Selected Country:', this.value);
+  });
+
+  // Initial messages
+  //addUserMessage("Hello, how can I help you?");
+  addBotMessage(" ");
+  setTimeout(function () {   addBotMessage("Hi there! I'm a chatbot. \n How can I help you today?"); }, 1000); // Adjust the delay as needed
+  //setTimeout(function () {   speakText2("Hi there! I'm a chatbot. \n How can I help you today?"); }, 1000); 
+});
+</script>
+</body>
+</html>
